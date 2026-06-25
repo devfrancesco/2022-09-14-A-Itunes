@@ -5,49 +5,46 @@ class View(ft.UserControl):
     def __init__(self, page: ft.Page):
         super().__init__()
         self._page = page
-        self._page.title = "Simulazione d'esame 10/06/2020"
+        self._page.title = "Esame 14/09/2022 iTunes"
         self._page.horizontal_alignment = 'CENTER'
         self._page.theme_mode = ft.ThemeMode.LIGHT
 
         self._controller = None
 
         self._title = None
-        self._dd_genere = None
-        self._dd_attore = None
-        self._txt_giorni = None
+        self._txt_durata = None
+        self._dd_album = None
+        self._txt_soglia = None
 
         self._btn_crea_grafo = None
-        self._btn_attori_simili = None
-        self._btn_simulazione = None
+        self._btn_analisi = None
+        self._btn_set_album = None
         self.txt_result = None
 
     def load_interface(self):
-        self._title = ft.Text("Simulazione d'esame 10/06/2020", color="blue", size=24)
+        self._title = ft.Text("Esame 14/09/2022 iTunes", color="blue", size=24)
         self._page.controls.append(self._title)
 
-        self._dd_genere = ft.Dropdown(label="Genere (g)", hint_text="Seleziona un genere", width=300)
-        self._btn_crea_grafo = ft.ElevatedButton(text="Crea Grafo", on_click=self._controller.handleCreaGrafo,
-                                                 width=200)
+        self._txt_durata = ft.TextField(label="Durata (d)", hint_text="Inserisci la durata in minuti", width=300)
+        self._btn_crea_grafo = ft.ElevatedButton(text="Crea Grafo", on_click=self._controller.handle_crea_grafo, width=200)
 
-        row1 = ft.Row([self._dd_genere, self._btn_crea_grafo],
+        row1 = ft.Row([self._txt_durata, self._btn_crea_grafo],
                       alignment=ft.MainAxisAlignment.CENTER,
                       vertical_alignment=ft.CrossAxisAlignment.END)
         self._page.controls.append(row1)
 
-        self._dd_attore = ft.Dropdown(label="Attore (a)", hint_text="Seleziona un attore", width=300)
-        self._btn_attori_simili = ft.ElevatedButton(text="Attori Simili", on_click=self._controller.handleAttoriSimili,
-                                                    width=200)
+        self._dd_album = ft.Dropdown(label="Album (a1)", hint_text="Seleziona un album", width=300)
+        self._btn_analisi = ft.ElevatedButton(text="Analisi Componente", on_click=self._controller.handle_analisi_componente, width=200)
 
-        row2 = ft.Row([self._dd_attore, self._btn_attori_simili],
+        row2 = ft.Row([self._dd_album, self._btn_analisi],
                       alignment=ft.MainAxisAlignment.CENTER,
                       vertical_alignment=ft.CrossAxisAlignment.END)
         self._page.controls.append(row2)
 
-        self._txt_giorni = ft.TextField(label="# Giorni (n)", hint_text="Inserisci un valore intero", width=300)
-        self._btn_simulazione = ft.ElevatedButton(text="Simulazione", on_click=self._controller.handleSimulazione,
-                                                  width=200)
+        self._txt_soglia = ft.TextField(label="Soglia (dTOT)", hint_text="Inserisci la soglia dTOT", width=300)
+        self._btn_set_album = ft.ElevatedButton(text="Set di Album", on_click=self._controller.handle_set_album, width=200)
 
-        row3 = ft.Row([self._txt_giorni, self._btn_simulazione],
+        row3 = ft.Row([self._txt_soglia, self._btn_set_album],
                       alignment=ft.MainAxisAlignment.CENTER,
                       vertical_alignment=ft.CrossAxisAlignment.END)
         self._page.controls.append(row3)
